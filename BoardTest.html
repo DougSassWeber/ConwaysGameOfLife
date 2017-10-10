@@ -24,10 +24,10 @@
   </style>
 </head>
 
-<body onload="loadGrid()">
+<body onload="CreateGrid()">
   <script>
 
-  function loadGrid() {
+  function CreateGrid() {
   // Skip the first 13 elements in string. Then read 10 and skip 2 until
   // full grid is read. Last element read will be 130 out of the 144 total char.
     //var lastClicked;
@@ -36,14 +36,14 @@
     console.log("You clicked on row:", row);
     console.log("You clicked on col:", col);
 
-    // POST the row and col here
 
-    el.className = 'alive';
-    //if (lastClicked) lastClicked.className = '';
-    //lastClicked = el;
+    if (!el.className == 'alive') {
+      el.className = 'alive';
+      // POST the row and col here
+      // Send row and column incremented by 1
+    }
+
     });
-
-    // Send row and column incremented by 1
 
     document.body.appendChild(grid);
 
@@ -55,7 +55,9 @@
       var tr = grid.appendChild(document.createElement('tr'));
       for (var c = 0; c < cols; ++c) {
         var cell = tr.appendChild(document.createElement('td'));
+        // Comment out below once code it working to fill in the database
         cell.innerHTML = i;
+        // Added an id to each element so it can be located to set className.
         cell.id = i;
         i++;
         cell.addEventListener('click', (function(el, r, c) {
@@ -66,19 +68,28 @@
       }
     }
 
-    // Will need to add a classname to each element stating it needs to be filled in.
     return grid;
     }
 
+    FillInGrid("01001000000101000101111001100011111010010001000110" +
+                 "11010100100010010111000000011111111110000001111000";);
+
     // Locate infomrmation on AJAX to always be looking for updated table
 
-    // 144 character string will be passed in to fill in the grid
+    // The original 144 character string returned by the table will be parsed
+    // down to the 100 character string to match the displayed table before
+    // sending to Javascript.
+    // 100 character string will be passed in to fill in the grid
+    function FillInGrid(table) {
+      var string = table;
 
-    var string = "01001000000101000101111001100011111010010001000111101010010001001011100000001111111111000000111100000";
-
-    for (var i = 0; i < string.length; i++) {
-      if (string.substr(i,1) == 1) {
-        document.getElementById(i).className = 'alive';
+      for (var i = 0; i < string.length; i++) {
+        if (string.substr(i,1) == 1) {
+          document.getElementById(i).className = 'alive';
+        }
+        else {
+          document.getElementById(i).className = '';
+        }
       }
     }
   }
