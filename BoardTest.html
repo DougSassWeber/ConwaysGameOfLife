@@ -81,8 +81,14 @@
     // sending to Javascript.
     // 100 character string will be passed in to fill in the grid
     function FillInGrid(table) {
+      // Holds the string that is passed to the function that corresponds to
+      // the table.
       var string = table;
 
+      // Loops through every character in the string and verifies it is alive.
+      // If character is alive, it will be a 1 and will correspond with the id
+      // of the cell. It then sets that cells className to 'alive.
+      // If it's not alive, it will change the className to ''.
       for (var i = 0; i < string.length; i++) {
         if (string.substr(i,1) == 1) {
           document.getElementById(i).className = 'alive';
