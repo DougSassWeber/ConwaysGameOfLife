@@ -18,19 +18,16 @@
       font-size: 13px
     }
 
-    .grid td.clicked {
+    .grid td.alive {
       background-color: black;
     }
   </style>
 </head>
 
-<body>
+<body onload="loadGrid()">
   <script>
 
-  // Locate infomrmation on AJAX to always be looking for updated table
-
-  // 144 character string will be passed in to fill in the grid
-
+  function loadGrid() {
   // Skip the first 13 elements in string. Then read 10 and skip 2 until
   // full grid is read. Last element read will be 130 out of the 144 total char.
     //var lastClicked;
@@ -41,7 +38,7 @@
 
     // POST the row and col here
 
-    el.className = 'clicked';
+    el.className = 'alive';
     //if (lastClicked) lastClicked.className = '';
     //lastClicked = el;
     });
@@ -58,6 +55,9 @@
       var tr = grid.appendChild(document.createElement('tr'));
       for (var c = 0; c < cols; ++c) {
         var cell = tr.appendChild(document.createElement('td'));
+        cell.innerHTML = i;
+        cell.id = i;
+        i++;
         cell.addEventListener('click', (function(el, r, c) {
           return function() {
             callback(el, r, c);
@@ -69,6 +69,20 @@
     // Will need to add a classname to each element stating it needs to be filled in.
     return grid;
     }
+
+    // Locate infomrmation on AJAX to always be looking for updated table
+
+    // 144 character string will be passed in to fill in the grid
+
+    var string = "01001000000101000101111001100011111010010001000111101010010001001011100000001111111111000000111100000";
+
+    for (var i = 0; i < string.length; i++) {
+      if (string.substr(i,1) == 1) {
+        document.getElementById(i).className = 'alive';
+      }
+    }
+  }
+
   </script>
 </body>
 
