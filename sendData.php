@@ -8,7 +8,7 @@
 			$table;
 			/*var val = "<?php echo $val ?>";*/
 			
-			$sql = "SELECT alive FROM Frozen WHERE id = "1"; //Active
+			$sql = "SELECT Alive FROM Frozen WHERE ID = "1"; //Active
 			
 			$result = $conn->query($sql);
 			if ($result->num_rows > 0) {
@@ -16,7 +16,7 @@
 				while($row = $result->fetch_assoc()) {
 				//	echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
 				//echo  $row["first"]. " " . $row["last"]. "<br>";
-					$table = $row["alive"];
+					$table = $row["Alive"];
 				}
 				
 	
@@ -36,7 +36,7 @@
 			}
 			
 			
-			$sql = "INSERT INTO Frozen(alive) VALUES ('$table') WHERE id = '1'";
+			$sql = "INSERT INTO Frozen(Alive) VALUES ('$table') WHERE ID = '1'";
 			//$result = $conn->query($sql);
 
 			if ($conn->query($sql) === TRUE) {
