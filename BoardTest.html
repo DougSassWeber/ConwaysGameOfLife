@@ -27,19 +27,26 @@
 <body onload="CreateGrid()">
   <script>
 
+  // String to hold data to fill the grid.
+  var gridString = "0000000000000000000000000" +
+                   "0000000000000000000000000" +
+                   "0000000000000000000000000" +
+                   "0000000000000000000000000";
+
   function CreateGrid() {
   // Skip the first 13 elements in string. Then read 10 and skip 2 until
   // full grid is read. Last element read will be 130 out of the 144 total char.
     //var lastClicked;
     var grid = clickableGrid(10, 10, function(el, row, col) {
-    console.log("You clicked on element:", el);
-    console.log("You clicked on row:", row);
-    console.log("You clicked on col:", col);
+      console.log("You clicked on element:", el);
+      console.log("You clicked on row:", row);
+      console.log("You clicked on col:", col);
 
-
-    if (!el.className == 'alive') {
-      ClickedCell(el, row, col);
-    }
+      // Checks if the cell is already alive.
+      // If not, then sends the element, row and cell to ClickedCell func.
+      if (!el.className == 'alive') {
+        ClickedCell(el, row, col);
+      }
 
     });
 
@@ -69,16 +76,25 @@
     return grid;
     }
 
-    FillInGrid("01001000000101000101111001100011111010010001000110" +
-                 "11010100100010010111000000011111111110000001111000";);
+    // Remove next row once AJAX is working
+    gridString = "01001000000101000101111001100011111010010001000110" +
+                 "11010100100010010111000000011111111110000001111000";
+    // Want this to run everytime we get a response from the AJAX with a new string.
+    // Will set gridString = to the response
+    FillInGrid(gridString);
 
+    // Function called everytime a dead cell is clicked to send that row and col
+    // to the php to update the database.
     function ClickedCell(el, row, col) {
       el.className = 'alive';
-      // POST the row and col here
+      // POST the row as r and col as c here
       // Send row and column incremented by 1
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET", "sendData.php?r=" + (row + 1) + "&c=" + (col + 1), true);
+      xmlhttp.send();
     }
 
-    // Locate infomrmation on AJAX to always be looking for updated table
 
     // The original 144 character string returned by the table will be parsed
     // down to the 100 character string to match the displayed table before
