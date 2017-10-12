@@ -3,8 +3,8 @@
 		<p>
 		<?php
 			include config.php
-			$row = "x"; //this is sent with the row it will be in the string, Doug will send it incremented by 1
-			$col = "y";
+			$location = "x"; //this is sent with the row it will be in the string, Doug will send it incremented by 1
+			
 			$table;
 			/*var val = "<?php echo $val ?>";*/
 			
@@ -28,7 +28,7 @@
 			$tablelen = strlen($table)
 			for (int $i = 0; $i < $tablelen; $i++)
 			{
-				if ($i == (($row * 12) + $col)
+				if ($i == $location)
 				{
 					
 					$table{$i} = '1';//try setting this to 5 or something to test is is changing the right one
