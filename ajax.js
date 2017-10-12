@@ -10,7 +10,6 @@
 //
 
 var xhttp = new XMLHttpRequest(); //request is how to pass data tos server
-
 //sending Server information
 function getCell{
 	xhttp.onreadystatechange = function() {
@@ -25,7 +24,7 @@ function getCell{
 
 xhttp.open("GET", "sendData.php", true); //get updates from onclick event to send to php,
 //pass to php the updated string.
-xhttp.send();//send updates to php
+xhttp.send();
 
 
 //handling server response
