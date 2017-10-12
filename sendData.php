@@ -3,12 +3,13 @@
 		<p>
 		<?php
 			include config.php
-			$location = "x"; //this is sent with the row it will be in the string, Doug will send it incremented by 1
-			
 			$table;
+			$location = "10"; //this is sent with the location it will be in the string, Doug will send it incremented by 1
+			//$ilocation = (int)$location; //no need to convert to int, php will handle it
+			
 			/*var val = "<?php echo $val ?>";*/
 			
-			$sql = "SELECT Alive FROM Frozen WHERE ID = "1"; //Active
+			$sql = "SELECT Alive FROM Frozen WHERE ID = '1'"; //Active
 			
 			$result = $conn->query($sql);
 			if ($result->num_rows > 0) {
@@ -44,7 +45,7 @@
 				}
 				
 			 else {
-				echo "Error inputing value.";
+				//echo "Error inputing value.";
 			}
 			
 			$conn->close();
