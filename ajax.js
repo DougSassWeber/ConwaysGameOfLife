@@ -12,7 +12,14 @@
 var xhttp = new XMLHttpRequest(); //request is how to pass data tos server
 
 //sending Server information
-xhttp.onreadystatechange = fillingrid;
+function getCell{
+	xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("ClickedCell").innerHTML = this.responseText;
+    }
+  };
+};
+
 //listen for javascript fillingrid function
 //tells php what was clicked, php then updates the table. php does the actual updates.
 
