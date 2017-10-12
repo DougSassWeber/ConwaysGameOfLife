@@ -4,9 +4,9 @@
 		<?php
 			include config.php
 			$table;
-			$row = "2"; //from 1 to 10
-			$col = "2"; //from 1 to 10
-			$location = (($row * 12) + $col); //this is sent with the location it will be in the string, Doug will send it incremented by 1
+			$row = $_GET['r']; //from 1 to 10
+			$col = $_GET['c']; //from 1 to 10
+			$location = (($row * 12) + $col); //this is the location it will be in the string
 			//$ilocation = (int)$location; //no need to convert to int, php will handle it
 			
 			/*var val = "<?php echo $val ?>";*/
