@@ -38,9 +38,7 @@
 
 
     if (!el.className == 'alive') {
-      el.className = 'alive';
-      // POST the row and col here
-      // Send row and column incremented by 1
+      ClickedCell(el, row, col);
     }
 
     });
@@ -73,6 +71,12 @@
 
     FillInGrid("01001000000101000101111001100011111010010001000110" +
                  "11010100100010010111000000011111111110000001111000";);
+
+    function ClickedCell(el, row, col) {
+      el.className = 'alive';
+      // POST the row and col here
+      // Send row and column incremented by 1
+    }
 
     // Locate infomrmation on AJAX to always be looking for updated table
 
