@@ -44,7 +44,7 @@
 
       // Checks if the cell is already alive.
       // If not, then sends the element, row and cell to ClickedCell func.
-      if (!el.className == 'alive') {
+      if (el.className != 'alive') {
         ClickedCell(el, row, col);
       }
 
@@ -92,22 +92,25 @@
 
       var xhttp = new XMLHttpRequest();
 	  
-	  function processRequest(){
-		xhttp.onreadystatechange = function() {
-			if (xhttp.readyState == 4 && xhttp.status == 200) {
-			 //document.getElementById("ClickedCell").innerHTML = this.responseText;
-			 document.write("this.responseText"); 
-			 //returns the response as a string, set it as a variable to then be seen in html
-			}
-		  };
-		};
+	  //window.alert("test1");
+	  console.log("in ClickedCell");
      // xmlhttp.open("GET", "sendData.php?r=" + (row + 1) + "&c=" + (col + 1), true);
      // xmlhttp.send();
 	  xhttp.open("POST", "sendData.php", true); //get updates from onclick event to send to php,
 
-	xhttp = setRequestHeader('Cache-Control', 'no-cache');
+	xhttp.setRequestHeader('Cache-Control', 'no-cache');
 	//pass to php the updated string.
-		xhttp.send( "r=" + (row + 1)+ "&c=" + (column + 1));
+
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+			 //document.getElementById("ClickedCell").innerHTML = this.responseText;
+			// document.write("this.responseText"); 
+			 //returns the response as a string, set it as a variable to then be seen in html
+			}
+		  };
+	
+	
+		xhttp.send( "r=" + (row + 1)+ "&c=" + (col + 1));
 	  
 		var response = xhttp.responseText;
     }
