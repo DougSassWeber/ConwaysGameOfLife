@@ -91,8 +91,25 @@
       // Send row and column incremented by 1
 
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "sendData.php?r=" + (row + 1) + "&c=" + (col + 1), true);
-      xmlhttp.send();
+	  
+	  function processRequest{
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+			 //document.getElementById("ClickedCell").innerHTML = this.responseText;
+			 document.write("this.responseText"); 
+			 //returns the response as a string, set it as a variable to then be seen in html
+			}
+		  };
+		};
+     // xmlhttp.open("GET", "sendData.php?r=" + (row + 1) + "&c=" + (col + 1), true);
+     // xmlhttp.send();
+	  xhttp.open("POST", "sendData.php", true); //get updates from onclick event to send to php,
+
+	xhttp = setRequestHeader('Cache-Control', 'no-cache');
+	//pass to php the updated string.
+		xhttp.send( "r=" + (row + 1)+ "&c=" + (column + 1));
+	  
+		var response = xhttp.responseText;
     }
 
 
