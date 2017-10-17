@@ -3,9 +3,14 @@
 		<p>
 		<?php
 			include config.php
+			echo "inSend";
 			$table;
-			$row = $_GET['r']; //from 1 to 10
-			$col = $_GET['c']; //from 1 to 10
+			$row = $_POST['r']; //from 1 to 10
+			$col = $_POST['c']; //from 1 to 10
+			if(isset($))
+			{
+				echo "yay!";
+			}
 			$location = (($row * 12) + $col); //this is the location it will be in the string
 			//$ilocation = (int)$location; //no need to convert to int, php will handle it
 			
