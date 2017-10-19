@@ -5,13 +5,15 @@
 			include "config.php";
 			//echo "inSend";
 			$table = "";
-			$row = $_POST['r']; //from 1 to 10
-			$col = $_POST['c']; //from 1 to 10
+			$row = (isset($_POST['r'])) ? $_POST['r'] : 1;//$_POST['r']; //from 1 to 10
+			$col = (isset($_POST['c'])) ? $_POST['c'] : 3;'no name';//$_POST['c']; //from 1 to 10
 			//if(isset($))
 			//{
 			//	echo "yay!";
 			//}
+			//echo $row;
 			$location = (($row * 12) + $col); //this is the location it will be in the string
+			//$location = 4;
 			//$ilocation = (int)$location; //no need to convert to int, php will handle it
 			
 			/*var val = "<?php echo $val ?>";*/
@@ -40,7 +42,7 @@
 				if ($i == $location)
 				{
 					
-					$table{$i} = '8';//try setting this to 5 or something to test is is changing the right one
+					$table{$i} = '1';//try setting this to 5 or something to test is is changing the right one
 				}
 			}
 			
