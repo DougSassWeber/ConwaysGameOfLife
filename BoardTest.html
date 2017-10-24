@@ -27,12 +27,52 @@
 <body onload="CreateGrid()">
   <script>
 
+  
+  
   // String to hold data to fill the grid.
   var gridString = "0000000000000000000000000" +
                    "0000000000000000000000000" +
                    "0000000000000000000000000" +
                    "0000000000000000000000000";
+  
+  //getting data repeatedly from the db
+  function retrieve(){
+   var xhttp = new XMLHttpRequest();
+	  
+	  //window.alert("test1");
+	 // console.log("in ClickedCell");
+     // xmlhttp.open("GET", "sendData.php?r=" + (row + 1) + "&c=" + (col + 1), true);
+     // xmlhttp.send();
+	  xhttp.open("POST", "retrieveData.php", true); //get updates from onclick event to send to php,
 
+	//xhttp.setRequestHeader('Cache-Control', 'no-cache');
+	//xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	//pass to php the updated string.
+
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+			 //document.getElementById("ClickedCell").innerHTML = this.responseText;
+			// document.write("this.responseText"); 
+			 //returns the response as a string, set it as a variable to then be seen in html
+			 var response;
+			response = xhttp.responseText;
+		
+			 console.log("response: " + response);
+			}
+		  };
+	
+		xhttp.send(null);
+		// 
+		//var params = 'r=1&c=1'
+		//xhttp.send(params);
+	 //window.setInterval(retrieve, 5000) 
+	 windows.setTimeout(retrieve, 1000);
+	}	
+		
+	retrieve();	
+	
+  
+  
   function CreateGrid() {
   // Skip the first 13 elements in string. Then read 10 and skip 2 until
   // full grid is read. Last element read will be 130 out of the 144 total char.
