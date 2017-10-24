@@ -56,7 +56,8 @@
 			 //document.getElementById("ClickedCell").innerHTML = this.responseText;
 			// document.write("this.responseText"); 
 			 //returns the response as a string, set it as a variable to then be seen in html
-			response = xhttp.responseText;
+			response = xhttp.responseText; //run fill in grid with the response in a substring of the important info
+			//keep in mind, this is the 144 char currently, we still need to change it to 100 on the php end.
 		
 			 console.log("response: " + response);
 			}
@@ -118,6 +119,8 @@
     }
 
     // Remove next row once AJAX is working
+	//UPDATE `Frozen` SET 'Alive' = '000000000000001001000000001010001010011100110000011111010010000010001100011010100100000100101110000000001110011111110000000011110000000000000000'
+	//
     gridString = "01001000000101000101111001100011111010010001000110" +
                  "11010100100010010111000000011111111110000001111000";
     // Want this to run everytime we get a response from the AJAX with a new string.
