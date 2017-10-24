@@ -34,6 +34,8 @@
                    "0000000000000000000000000" +
                    "0000000000000000000000000" +
                    "0000000000000000000000000";
+				   
+  var response;
   
   //getting data repeatedly from the db
   function retrieve(){
@@ -54,7 +56,6 @@
 			 //document.getElementById("ClickedCell").innerHTML = this.responseText;
 			// document.write("this.responseText"); 
 			 //returns the response as a string, set it as a variable to then be seen in html
-			 var response;
 			response = xhttp.responseText;
 		
 			 console.log("response: " + response);
