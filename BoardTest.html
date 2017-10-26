@@ -27,20 +27,18 @@
 <body onload="CreateGrid()">
   <script>
 
-  
-  
   // String to hold data to fill the grid.
   var gridString = "0000000000000000000000000" +
                    "0000000000000000000000000" +
                    "0000000000000000000000000" +
                    "0000000000000000000000000";
-				   
+
   var response;
-  
+
   //getting data repeatedly from the db
   function retrieve(){
    var xhttp = new XMLHttpRequest();
-	  
+
 	  //window.alert("test1");
 	 // console.log("in ClickedCell");
      // xmlhttp.open("GET", "sendData.php?r=" + (row + 1) + "&c=" + (col + 1), true);
@@ -53,32 +51,33 @@
 
 		xhttp.onreadystatechange = function() {
 			if (xhttp.readyState == 4 && xhttp.status == 200) {
-			 //document.getElementById("ClickedCell").innerHTML = this.responseText;
-			// document.write("this.responseText"); 
-			 //returns the response as a string, set it as a variable to then be seen in html
-			response = xhttp.responseText; //run fill in grid with the response in a substring of the important info
-			//keep in mind, this is the 144 char currently, we still need to change it to 100 on the php end.
-		
-			 console.log("response: " + response);
+  			 //document.getElementById("ClickedCell").innerHTML = this.responseText;
+  			// document.write("this.responseText");
+  			 //returns the response as a string, set it as a variable to then be seen in html
+  			response = xhttp.responseText; //run fill in grid with the response in a substring of the important info
+  			//keep in mind, this is the 144 char currently, we still need to change it to 100 on the php end.
+        console.log("response: " + response);
+        gridString = response.substr();
+        console.log("Substring: " + gridString);
+        FillInGrid(gridString);
+
 			}
-		  };
-	
+	  };
+
 		xhttp.send(null);
-		// 
+		//
 		//var params = 'r=1&c=1'
 		//xhttp.send(params);
-	 //window.setInterval(retrieve, 5000) 
+	 //window.setInterval(retrieve, 5000)
 	 windows.setTimeout(retrieve, 1000);
-	}	
-		
-	retrieve();	
-	
-  
-  
+	}
+
+	retrieve();
+
+
+
   function CreateGrid() {
-  // Skip the first 13 elements in string. Then read 10 and skip 2 until
-  // full grid is read. Last element read will be 130 out of the 144 total char.
-    //var lastClicked;
+    // var lastClicked;
     var grid = clickableGrid(10, 10, function(el, row, col) {
       console.log("You clicked on element:", el);
       console.log("You clicked on row:", row);
@@ -119,8 +118,8 @@
     }
 
     // Remove next row once AJAX is working
-	//UPDATE `Frozen` SET 'Alive' = '000000000000001001000000001010001010011100110000011111010010000010001100011010100100000100101110000000001110011111110000000011110000000000000000'
-	//
+  	// UPDATE `Frozen` SET 'Alive' = '000000000000001001000000001010001010011100110000011111010010000010001100011010100100000100101110000000001110011111110000000011110000000000000000'
+
     gridString = "01001000000101000101111001100011111010010001000110" +
                  "11010100100010010111000000011111111110000001111000";
     // Want this to run everytime we get a response from the AJAX with a new string.
@@ -135,32 +134,32 @@
       // Send row and column incremented by 1
 
       var xhttp = new XMLHttpRequest();
-	  
-	  //window.alert("test1");
-	  console.log("in ClickedCell");
-     // xmlhttp.open("GET", "sendData.php?r=" + (row + 1) + "&c=" + (col + 1), true);
-     // xmlhttp.send();
-	  xhttp.open("POST", "sendData.php", true); //get updates from onclick event to send to php,
 
-	//xhttp.setRequestHeader('Cache-Control', 'no-cache');
-	xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	//pass to php the updated string.
+	    //window.alert("test1");
+	    console.log("in ClickedCell");
+      // xmlhttp.open("GET", "sendData.php?r=" + (row + 1) + "&c=" + (col + 1), true);
+      // xmlhttp.send();
+	    xhttp.open("POST", "sendData.php", true); //get updates from onclick event to send to php,
 
-		xhttp.onreadystatechange = function() {
-			if (xhttp.readyState == 4 && xhttp.status == 200) {
-			 //document.getElementById("ClickedCell").innerHTML = this.responseText;
-			// document.write("this.responseText"); 
-			 //returns the response as a string, set it as a variable to then be seen in html
-			 
-			}
+	    //xhttp.setRequestHeader('Cache-Control', 'no-cache');
+	    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	    //pass to php the updated string.
+
+		  xhttp.onreadystatechange = function() {
+  			if (xhttp.readyState == 4 && xhttp.status == 200) {
+  			 //document.getElementById("ClickedCell").innerHTML = this.responseText;
+  			// document.write("this.responseText");
+  			 //returns the response as a string, set it as a variable to then be seen in html
+
+  			}
 		  };
-	
-		xhttp.send( "r=" + (row + 1)+ "&c=" + (col + 1));
-		// 
-		//var params = 'r=1&c=1'
-		//xhttp.send(params);
-	  
-		var response = xhttp.responseText;
+
+  		xhttp.send( "r=" + (row + 1)+ "&c=" + (col + 1));
+  		//
+  		//var params = 'r=1&c=1'
+  		//xhttp.send(params);
+
+  		var response = xhttp.responseText;
     }
 
 
