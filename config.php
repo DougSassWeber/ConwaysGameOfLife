@@ -1,7 +1,4 @@
-<html>
-	<body>
-		<p>
-		<?php
+<?php
 			$servername = "localhost";
 			$username = "W01230747";
 			$password = "Mikaellecs!";
@@ -16,6 +13,3 @@
 
 
 		?>
-		</p>
-	</body>
-</html>

@@ -1,8 +1,6 @@
-<html>
-	<body>
-		
-		<?php
+<?php
 			include "config.php";
+			//echo "hello";
 			//echo "inRetrieve";
 			$table = "";
 			
@@ -25,6 +23,7 @@
 		//		else {
 			//	echo "0 results";
 			//}
+		
 			
 			$tablelen = strlen($table);
 			$variable = "";
@@ -48,7 +47,7 @@
 					case 12: 
 					case 23:
 					case 24:
-					case 25:
+					case 35:
 					case 36:
 					case 47:
 					case 48:  
@@ -89,6 +88,3 @@
 			
 			$conn->close();
 		?>
-		
-	</body>
-</html>

@@ -35,44 +35,7 @@
 
   var response;
 
-  //getting data repeatedly from the db
-  function retrieve(){
-   var xhttp = new XMLHttpRequest();
-
-	  //window.alert("test1");
-	 // console.log("in ClickedCell");
-     // xmlhttp.open("GET", "sendData.php?r=" + (row + 1) + "&c=" + (col + 1), true);
-     // xmlhttp.send();
-	  xhttp.open("POST", "retrieveData.php", true); //get updates from onclick event to send to php,
-
-	//xhttp.setRequestHeader('Cache-Control', 'no-cache');
-	//xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	//pass to php the updated string.
-
-		xhttp.onreadystatechange = function() {
-			if (xhttp.readyState == 4 && xhttp.status == 200) {
-  			 //document.getElementById("ClickedCell").innerHTML = this.responseText;
-  			// document.write("this.responseText");
-  			 //returns the response as a string, set it as a variable to then be seen in html
-  			response = xhttp.responseText; //run fill in grid with the response in a substring of the important info
-  			//keep in mind, this is the 144 char currently, we still need to change it to 100 on the php end.
-        console.log("response: " + response);
-        gridString = response.substr();
-        console.log("Substring: " + gridString);
-        FillInGrid(gridString);
-
-			}
-	  };
-
-		xhttp.send(null);
-		//
-		//var params = 'r=1&c=1'
-		//xhttp.send(params);
-	 //window.setInterval(retrieve, 5000)
-	 windows.setTimeout(retrieve, 1000);
-	}
-
-	retrieve();
+  
 
 
 
@@ -120,11 +83,11 @@
     // Remove next row once AJAX is working
   	// UPDATE `Frozen` SET 'Alive' = '000000000000001001000000001010001010011100110000011111010010000010001100011010100100000100101110000000001110011111110000000011110000000000000000'
 
-    gridString = "01001000000101000101111001100011111010010001000110" +
-                 "11010100100010010111000000011111111110000001111000";
+    //gridString = "01001000000101000101111001100011111010010001000110" +
+     //            "11010100100010010111000000011111111110000001111000";
     // Want this to run everytime we get a response from the AJAX with a new string.
     // Will set gridString = to the response
-    FillInGrid(gridString);
+    //FillInGrid(gridString);
 
     // Function called everytime a dead cell is clicked to send that row and col
     // to the php to update the database.
@@ -163,7 +126,10 @@
     }
 
 
-    // The original 144 character string returned by the table will be parsed
+    
+  }
+  
+  // The original 144 character string returned by the table will be parsed
     // down to the 100 character string to match the displayed table before
     // sending to Javascript.
     // 100 character string will be passed in to fill in the grid
@@ -176,16 +142,67 @@
       // If character is alive, it will be a 1 and will correspond with the id
       // of the cell. It then sets that cells className to 'alive.
       // If it's not alive, it will change the className to ''.
+	  console.log(string.length);
       for (var i = 0; i < string.length; i++) {
+		
         if (string.substr(i,1) == 1) {
-          document.getElementById(i).className = 'alive';
+          //console.log("alive:" + i);
+		  document.getElementById(i).className = 'alive';
+		  
         }
         else {
-          document.getElementById(i).className = '';
+			//console.log("dead : " + i);
+          document.getElementById(i).className = 'dead';
         }
       }
     }
-  }
+  
+  
+  //getting data repeatedly from the db
+  function retrieve(){
+   var xhttp = new XMLHttpRequest();
+
+	  //window.alert("test1");
+	 // console.log("in ClickedCell");
+     // xmlhttp.open("GET", "sendData.php?r=" + (row + 1) + "&c=" + (col + 1), true);
+     // xmlhttp.send();
+	  xhttp.open("POST", "retrieveData.php", true); //get updates from onclick event to send to php,
+
+	//xhttp.setRequestHeader('Cache-Control', 'no-cache');
+	//xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	//pass to php the updated string.
+
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+  			 //document.getElementById("ClickedCell").innerHTML = this.responseText;
+  			// document.write("this.responseText");
+  			 //returns the response as a string, set it as a variable to then be seen in html
+  			response = xhttp.responseText; //run fill in grid with the response in a substring of the important info
+  			//keep in mind, this is the 144 char currently, we still need to change it to 100 on the php end.
+		
+        console.log(response);
+		
+		console.log("response");
+		gridString = response;
+		console.log(gridString);
+		FillInGrid(gridString);
+        //gridString = response.substr(0);
+        //console.log("Substring: " + gridString);
+        
+
+			}
+	  };
+
+		xhttp.send(null);
+		//
+		//var params = 'r=1&c=1'
+		//xhttp.send(params);
+	 //window.setInterval(retrieve, 5000)
+	 
+	 window.setTimeout(retrieve, 1000);
+	}
+
+	retrieve();
 
   </script>
 </body>
