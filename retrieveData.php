@@ -7,7 +7,7 @@
 			
 			/*var val = "<?php echo $val ?>";*/
 			
-			$sql = "SELECT Alive FROM Frozen WHERE ID = '1'"; //Active
+			$sql = "SELECT Alive FROM Active WHERE ActiveID = '0'"; //Active
 			
 			$result = $conn->query($sql);
 			if ($result->num_rows > 0) {

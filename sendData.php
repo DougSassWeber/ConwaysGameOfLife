@@ -18,7 +18,7 @@
 			
 			/*var val = "<?php echo $val ?>";*/
 			
-			$sql = "SELECT Alive FROM Frozen WHERE ID = '1'"; //Active
+			$sql = "SELECT Alive FROM Active WHERE ActiveID = '0'"; //Active
 			
 			$result = $conn->query($sql);
 			if ($result->num_rows > 0) {
@@ -34,6 +34,9 @@
 		//		else {
 			//	echo "0 results";
 			//}
+
+
+		        echo $table;
 			
 			//loop through string to proper index
 			$tablelen = strlen($table);
@@ -47,7 +50,7 @@
 			}
 			
 			
-			$sql = "UPDATE Frozen SET Alive = '$table' WHERE ID = '1'";
+			$sql = "UPDATE Active SET Alive = '$table' WHERE ActiveID = '0'";
 			$result = $conn->query($sql);
 
 			if ($conn->query($sql) === TRUE) {
@@ -57,6 +60,27 @@
 			 else {
 				//echo "Error inputing value.";
 			}
+
+
+			$sql = "SELECT Alive FROM Active WHERE ActiveID = '0'"; //Active
+			
+			$result = $conn->query($sql);
+			if ($result->num_rows > 0) {
+				// output data of each row
+				while($row = $result->fetch_assoc()) {
+				//	echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+				//echo  $row["first"]. " " . $row["last"]. "<br>";
+					$table = $row["Alive"];
+				}
+			
+	
+			}
+		//		else {
+			//	echo "0 results";
+			//}
+
+			
+
 			
 			$conn->close();
 		?>
