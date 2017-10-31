@@ -26,22 +26,22 @@
 
 <body onload="CreateGrid()">
   <script>
+  // States the size of the grid will be 30x30
+  var size = 30;
 
   // String to hold data to fill the grid.
-  var gridString = "0000000000000000000000000" +
-                   "0000000000000000000000000" +
-                   "0000000000000000000000000" +
-                   "0000000000000000000000000";
+  var gridString = "0";
+
+  // Fill grid string with enough 0's to fill the entire grid as dead.
+  for (var i = 0; i < ((size*size)-1); i++) {
+    gridString = gridString.concat("0");
+  }
 
   var response;
 
-  
-
-
-
   function CreateGrid() {
     // var lastClicked;
-    var grid = clickableGrid(10, 10, function(el, row, col) {
+    var grid = clickableGrid(size, size, function(el, row, col) {
       console.log("You clicked on element:", el);
       console.log("You clicked on row:", row);
       console.log("You clicked on col:", col);
@@ -126,9 +126,9 @@
     }
 
 
-    
+
   }
-  
+
   // The original 144 character string returned by the table will be parsed
     // down to the 100 character string to match the displayed table before
     // sending to Javascript.
@@ -144,11 +144,11 @@
       // If it's not alive, it will change the className to ''.
 	  console.log(string.length);
       for (var i = 0; i < string.length; i++) {
-		
+
         if (string.substr(i,1) == 1) {
           //console.log("alive:" + i);
 		  document.getElementById(i).className = 'alive';
-		  
+
         }
         else {
 			//console.log("dead : " + i);
@@ -156,8 +156,8 @@
         }
       }
     }
-  
-  
+
+
   //getting data repeatedly from the db
   function retrieve(){
    var xhttp = new XMLHttpRequest();
@@ -179,16 +179,16 @@
   			 //returns the response as a string, set it as a variable to then be seen in html
   			response = xhttp.responseText; //run fill in grid with the response in a substring of the important info
   			//keep in mind, this is the 144 char currently, we still need to change it to 100 on the php end.
-		
+
         console.log(response);
-		
+
 		console.log("response");
 		gridString = response;
 		console.log(gridString);
 		FillInGrid(gridString);
         //gridString = response.substr(0);
         //console.log("Substring: " + gridString);
-        
+
 
 			}
 	  };
@@ -198,7 +198,7 @@
 		//var params = 'r=1&c=1'
 		//xhttp.send(params);
 	 //window.setInterval(retrieve, 5000)
-	 
+
 	 window.setTimeout(retrieve, 1000);
 	}
 
